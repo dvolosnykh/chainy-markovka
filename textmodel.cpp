@@ -32,7 +32,7 @@ void TextModel::generateTo(std::ostream& out, unsigned minLength) const
         const auto item = m_table.find(prev);
         assert(item != m_table.end());
 
-        std::string token = chooseWord(item->second);
+        std::string token = chooseNextToken(item->second);
         assert(!token.empty());
 
         out << token << ' ';
@@ -58,7 +58,7 @@ void TextModel::print(std::ostream& out) const
     out << std::endl;
 }
 
-std::string TextModel::chooseWord(const SubTable& subtable)
+std::string TextModel::chooseNextToken(const SubTable& subtable)
 {
     std::random_device randomDevice;
     std::mt19937 randomGenerator(randomDevice());

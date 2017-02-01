@@ -27,7 +27,7 @@ public:
     void print(std::ostream &out) const;
 
 private:
-    static std::string chooseWord(const SubTable& subtable);
+    static std::string chooseNextToken(const SubTable& subtable);
 
 private:
      Table m_table;
