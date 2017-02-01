@@ -35,7 +35,9 @@ void TextModel::generateTo(std::ostream& out, unsigned minLength) const
         std::string token = chooseNextToken(item->second);
         assert(!token.empty());
 
-        out << token << ' ';
+        if (length > 0 && !std::ispunct(token[0]))
+            out << ' ';
+        out << token;
         ++length;
 
         if (length >= minLength && token == ".")
