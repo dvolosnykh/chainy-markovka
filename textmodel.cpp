@@ -65,15 +65,14 @@ std::string TextModel::chooseNextToken(const SubTable& subtable)
     std::random_device randomDevice;
     std::mt19937 randomGenerator(randomDevice());
     std::uniform_int_distribution<unsigned> uniform_dist(1, subtable.totalCounter);
-    const unsigned randomChoice = uniform_dist(randomGenerator);
+    unsigned randomChoice = uniform_dist(randomGenerator);
 
-    unsigned choiceComplement = subtable.totalCounter - randomChoice;
     for (const auto &subitem : subtable.followers)
     {
-        if (choiceComplement < subitem.second)
+        if (randomChoice <= subitem.second)
             return subitem.first;
 
-        choiceComplement -= subitem.second;
+        randomChoice -= subitem.second;
     }
 
     return {};
